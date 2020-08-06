@@ -14,18 +14,61 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Board List</title>
+<style>
+    .container {
+        width: 700px;
+        margin: 0 auto;
+    }
+    caption {
+        font-size: 30px;
+        font-weight: 900;
+        margin-bottom: 10px;
+    }
+    table {
+        border-collapse: collapse;
+        width: inherit;
+    }
+    th {
+        background-color: pink;
+    }
+    td {
+    	text-align: center;
+    }
+    th, td {
+        border: 1px solid black;
+        font-size: 20px;
+        padding: 10px 0;
+    }
+    tr:nth-child(odd) {
+        background-color: whitesmoke;
+    }
+    tr:nth-child(even) {
+        background-color: silver;
+    }
+    .list_content:hover {
+    	background-color: wheat;
+    	cursor: pointer;
+    	transition: 1s ease;
+    }
+</style>
 </head>
 <body>
 	<main class="container">
         <table>
+            <caption>게시판 리스트</caption>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+            </colgroup>
             <tr>
                 <th>No</th>
                 <th>제목</th>
                 <th>작성자</th>
             </tr>
             <% for(BoardVO vo : list) {%>
-            <tr>
+            <tr class="list_content" onclick="moveToDetail(<%= vo.getI_board()%>)">
                 <td><%= vo.getI_board()%></td>
                 <td><%= vo.getTitle()%></td>
                 <td><%= vo.getI_student()%></td>
@@ -33,5 +76,10 @@
             <% }%>
         </table>
     </main>
+    <script>
+        function moveToDetail(i_board) {
+            location.href='/BoardDetail?i_board=' + i_board;
+        }
+    </script>
 </body>
 </html>

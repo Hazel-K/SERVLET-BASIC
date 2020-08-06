@@ -25,8 +25,8 @@ public class BoardListSer extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// request : 브라우저가 뭔지, 데이터는 뭔지, 유저가 준 정보는 다 들어있음.
-		String strI_board = request.getParameter("i_board");
-		System.out.println("Servlet i_board : " + strI_board);
+//		String strI_board = request.getParameter("i_board");
+//		System.out.println("Servlet i_board : " + strI_board);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/BoardList.jsp");
 		// getRequestDispatcher();와 sendRedirect(); 와의 차이점
@@ -35,7 +35,6 @@ public class BoardListSer extends HttpServlet {
 		// 3. doGet, doPost에서 sendRedirect();를 날리면 무조건 get방식으로 전송된다. 또한 각 디스패처는 jsp외에 servlet을 호출할 수 있다.
 		// doGet을 이용해서 WebInfo를 열고, doPost를 이용하여 servlet에 접속하면 파라미터를 노출시키지 않고 웹페이지 접근이 가능하다.
 		// 같은 클래스 내의 페이지 이동은 디스패처를 통해 가능. 그 외에는 리다이렉트를 사용
-		
 		List<BoardVO> list = BoardDAO.selBoardList(); // static으로 생성된 함수를 호출 가능, import 필요
 		request.setAttribute("data", list);
 		rd.forward(request, response);
