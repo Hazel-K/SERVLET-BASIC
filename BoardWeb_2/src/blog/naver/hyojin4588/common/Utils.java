@@ -2,6 +2,10 @@ package blog.naver.hyojin4588.common;
 
 public class Utils {
 	
+	public static int parseStringToInt(String arg0) {
+		return parseStringToInt(arg0, 0);
+	}
+	
 	public static int parseStringToInt(String arg0, int arg1) {
 		try {
 			return Integer.parseInt(arg0);

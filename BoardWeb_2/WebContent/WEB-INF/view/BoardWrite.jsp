@@ -53,13 +53,14 @@ input {
 
 textarea {
 	font-size: 18px;
+	resize: none;
 }
 </style>
 </head>
 
 <body>
 	<main class="container">
-		<form id="write" action="BoardWriteProc" method="post" onsubmit="return elechk();">
+		<form id="write" action="/BoardWriteProc" method="post" onsubmit="return elechk();">
 			<fieldset>
 				<legend>글 작성하기</legend>
 				<div class="opt ctnt1">

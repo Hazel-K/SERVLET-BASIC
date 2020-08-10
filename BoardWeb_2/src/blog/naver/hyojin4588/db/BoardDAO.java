@@ -1,7 +1,10 @@
 package blog.naver.hyojin4588.db;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import blog.naver.hyojin4588.vo.BoardVO;
 
@@ -67,4 +70,45 @@ public class BoardDAO {
 		return vo;
 	}
 
+	public static int insBoard(BoardVO param) {
+		int result = 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		String sql = "INSERT INTO t_board(i_board, i_student, title, ctnt) VALUES (seq_board.nextval, ?, ?, ?)";
+		
+		try {
+			con = DbCon.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, param.getI_student());
+			ps.setNString(2, param.getTitle());
+			ps.setNString(3, param.getCtnt());
+			result = ps.executeUpdate(); // 이외에 execute(), executeQuery()가 있음.
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DbCon.close(con, ps);
+		}
+		return result;
+	}
+	
+	public static int delBoard(BoardVO param) {
+		int result = 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		String sql = "DELETE FROM t_board WHERE i_board=?";
+		
+		try {
+			con = DbCon.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, param.getI_board());
+			result = ps.executeUpdate(); // 이외에 execute(), executeQuery()가 있음.
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DbCon.close(con, ps);
+		}
+		return result;
+	}
 }

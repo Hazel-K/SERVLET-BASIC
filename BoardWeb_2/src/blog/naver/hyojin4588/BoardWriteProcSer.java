@@ -7,14 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/BoardWrite")
-public class BoardWriteSer extends HttpServlet {
+import blog.naver.hyojin4588.common.Utils;
+import blog.naver.hyojin4588.db.BoardDAO;
+import blog.naver.hyojin4588.vo.BoardVO;
+
+/**
+ * Servlet implementation class BoardWriteProcSer
+ */
+@WebServlet("/BoardWriteProc")
+public class BoardWriteProcSer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardWriteSer() {
+    public BoardWriteProcSer() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -24,8 +31,7 @@ public class BoardWriteSer extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		request.getRequestDispatcher("/WEB-INF/view/BoardWrite.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/BoardWriteProc.jsp").forward(request, response);
 	}
 
 	/**
@@ -33,7 +39,18 @@ public class BoardWriteSer extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String title = request.getParameter("title");
+		String strI_student = request.getParameter("nm");
+		String ctnt = request.getParameter("ctnt");
+		BoardVO param = new BoardVO();
+		param.setI_student(Utils.parseStringToInt(strI_student));
+		param.setTitle(title);
+		param.setCtnt(ctnt);
+		
+		int result = BoardDAO.insBoard(param);
+		request.setAttribute("temp", result);
+		
+//		doGet(request, response);
 	}
 
 }
