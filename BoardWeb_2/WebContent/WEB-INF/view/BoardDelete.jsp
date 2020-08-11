@@ -17,7 +17,7 @@
 			location.href="/";
 			return;
 		} else {
-			alert('삭제에 실패했습니다. 다시 시도해주세요.');
+			alert('삭제에 실패했습니다. 관리자에게 문의해주세요.');
 			location.href="/BoardDetail?i_board=" + <%=result%>;
 			return;
 		}

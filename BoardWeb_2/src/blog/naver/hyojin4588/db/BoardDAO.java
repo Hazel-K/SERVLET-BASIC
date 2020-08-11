@@ -16,7 +16,7 @@ public class BoardDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		String sql = "SELECT i_board, i_student, title FROM t_board ORDER BY i_board DESC";
+		String sql = "SELECT i_board, nm, title, i_student FROM t_board_joinedName ORDER BY i_board DESC";
 		try {
 			con = DbCon.getCon();
 			ps = con.prepareStatement(sql);
@@ -27,6 +27,7 @@ public class BoardDAO {
 				vo.setI_board(rs.getInt("i_board"));
 				vo.setI_student(rs.getInt("i_student"));
 				vo.setTitle(rs.getNString("title"));
+				vo.setNm(rs.getNString("nm"));
 				list.add(vo);
 			}
 		} catch (Exception e) {
@@ -44,7 +45,7 @@ public class BoardDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		String sql = "SELECT i_board, i_student, title, ctnt FROM t_board WHERE i_board=?";
+		String sql = "SELECT i_board, nm, title, i_student, ctnt FROM t_board_joinedName WHERE i_board=?";
 
 		try {
 			vo = new BoardVO();
@@ -59,6 +60,7 @@ public class BoardDAO {
 				vo.setI_board(rs.getInt("i_board"));
 				vo.setI_student(rs.getInt("i_student"));
 				vo.setTitle(rs.getNString("title"));
+				vo.setNm(rs.getNString("nm"));
 				vo.setCtnt(rs.getNString("ctnt"));
 			}
 		} catch (Exception e) {
@@ -83,6 +85,29 @@ public class BoardDAO {
 			ps.setInt(1, param.getI_student());
 			ps.setNString(2, param.getTitle());
 			ps.setNString(3, param.getCtnt());
+			result = ps.executeUpdate(); // 이외에 execute(), executeQuery()가 있음.
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DbCon.close(con, ps);
+		}
+		return result;
+	}
+	
+	public static int modBoard(BoardVO param) { 
+		int result = 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		String sql = "UPDATE t_board SET (i_student, title, ctnt) = (SELECT ?, ?, ? FROM DUAL) WHERE i_board = ?";
+		
+		try {
+			con = DbCon.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, param.getI_student());
+			ps.setNString(2, param.getTitle());
+			ps.setNString(3, param.getCtnt());
+			ps.setInt(4, param.getI_board());
 			result = ps.executeUpdate(); // 이외에 execute(), executeQuery()가 있음.
 		} catch (Exception e) {
 			e.printStackTrace();

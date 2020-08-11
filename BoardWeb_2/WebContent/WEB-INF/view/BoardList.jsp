@@ -89,7 +89,7 @@ tr:nth-child(even) {
 				onclick="moveToDetail(<%=vo.getI_board()%>)">
 				<td><%=vo.getI_board()%></td>
 				<td><%=vo.getTitle()%></td>
-				<td><%=vo.getI_student()%></td>
+				<td><%=vo.getNm()%></td>
 			</tr>
 			<%
 				}
@@ -102,7 +102,7 @@ tr:nth-child(even) {
             location.href='/BoardDetail?i_board=' + i_board;
         }
         function goWrite() {
-        		location.href="/BoardWrite";
+        	location.href="/BoardWrite";
         }
     </script>
 </body>

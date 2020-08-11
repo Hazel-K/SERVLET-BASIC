@@ -6,6 +6,7 @@ public class BoardVO {
 	private String title;
 	private String ctnt;
 	private int i_student;
+	private String nm;
 	
 	
 	public int getI_board() {
@@ -31,6 +32,12 @@ public class BoardVO {
 	}
 	public void setI_student(int i_student) {
 		this.i_student = i_student;
+	}
+	public String getNm() {
+		return nm;
+	}
+	public void setNm(String nm) {
+		this.nm = nm;
 	}
 
 }

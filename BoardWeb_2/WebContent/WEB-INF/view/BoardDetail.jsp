@@ -59,7 +59,7 @@
 		</header>
 		<section class="auth__wrap wrapper">
 			<div class="auth__title">작성자 :</div>
-			<div class="auth__ctnt">${data.i_student}</div>
+			<div class="auth__ctnt">${data.nm}</div>
 		</section>
 		<section class="ctnt__wrap wrapper">
 			<div class="ctnt__title"></div>
@@ -77,7 +77,9 @@
 		}
 		
 		function goDelete() {
+			if(confirm('글을 정말로 삭제하시겠습니까?')) {
 			location.href = "/BoardDelete?i_board=" + <%=vo.getI_board()%>;
+			}
 		}
 		
 		function goMod() {

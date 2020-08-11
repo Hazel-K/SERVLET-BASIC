@@ -59,29 +59,38 @@ textarea {
 </head>
 
 <body>
+	<div class="err">${msg2}</div>
 	<main class="container">
-		<form id="write" action="/BoardWriteProc" method="post" onsubmit="return elechk();">
+		<form id="write" action="/BoardWrite" method="post" onsubmit="return elechk();">
 			<fieldset>
 				<legend>글 작성하기</legend>
 				<div class="opt ctnt1">
-					<label for="ipt1">제목 </label><input type="text" name="title" id="ipt1">
+					<label for="ipt1">제목 </label><input type="text" name="title" id="ipt1" value="${vo2.title}">
 				</div>
 				<div class="opt ctnt2">
-					<label for="ipt2">작성자 </label><input type="text" name="nm" id="ipt2">
+					<label for="ipt2">작성자 </label><input type="text" placeholder="ID_NUMBER로 입력" name="nm" id="ipt2" value="${vo2.i_student}">
 				</div>
 				<div class="opt ctnt3">
 					<label for="ipt3">내용 </label>
-					<textarea name="ctnt" id="ipt3" cols="30" rows="10"></textarea>
+					<textarea name="ctnt" id="ipt3" cols="30" rows="10">${vo2.ctnt}</textarea>
 				</div>
 			</fieldset>
 			<div class="btn__wrap">
-				<button id="btn1">글등록</button>
+				<button id="btn1">${msg}</button>
 				<button id="btn2" onclick="goTitle();">돌아가기</button>
 			</div>
 		</form>
 	</main>
 
 	<script>
+		(()=>{
+			var ipt2 = document.querySelector('#ipt2');
+			if (ipt2.value != 0) {
+				ipt2.readOnly = true;
+				//ipt2.setAttribute("readOnly",true);
+			}
+		})();
+	
 		function elechk() {
 			if (eleValid(write.title, '제목')) {
 				return false;
