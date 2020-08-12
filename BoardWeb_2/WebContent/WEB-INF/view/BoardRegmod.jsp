@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Write</title>
+<title>MODIFY</title>
 <style>
 .container {
 	width: 700px;
@@ -64,11 +64,12 @@ textarea {
 		<form id="write" action="/${vo2 == null? 'BoardWrite' : 'BoardMod'}" method="post" onsubmit="return elechk();">
 			<fieldset>
 				<legend>글 작성하기</legend>
+				<input type="hidden" value="${vo2.i_board}" name="i_board"> <!-- i_board값 가져오는거 잊지말기 -->
 				<div class="opt ctnt1">
 					<label for="ipt1">제목 </label><input type="text" name="title" id="ipt1" value="${vo2.title}">
 				</div>
 				<div class="opt ctnt2">
-					<label for="ipt2">작성자 </label><input type="text" placeholder="ID_NUMBER로 입력" name="nm" id="ipt2" value="${vo2.i_student}">
+					<label for="ipt2">작성자 </label><input type="text" placeholder="ID_NUMBER로 입력" name="nm" id="ipt2" value="${vo2.i_student}"> <!-- ${vo2 == null ? '':'readOnly'} 로도 제한 가능 -->
 				</div>
 				<div class="opt ctnt3">
 					<label for="ipt3">내용 </label>

@@ -83,7 +83,7 @@
 		}
 		
 		function goMod() {
-			location.href = "/BoardWrite?i_board=" + <%=vo.getI_board()%>;
+			location.href = "/BoardMod?i_board=" + <%=vo.getI_board()%>;
 		}
 	</script>
 </body>

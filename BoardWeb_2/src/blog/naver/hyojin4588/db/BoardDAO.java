@@ -94,20 +94,20 @@ public class BoardDAO {
 		return result;
 	}
 	
-	public static int modBoard(BoardVO param) { 
+	public static int updBoard(BoardVO param) { 
 		int result = 0;
 		Connection con = null;
 		PreparedStatement ps = null;
 		
-		String sql = "UPDATE t_board SET (i_student, title, ctnt) = (SELECT ?, ?, ? FROM DUAL) WHERE i_board = ?";
+		String sql = "UPDATE t_board SET (title, ctnt) = (SELECT ?, ? FROM DUAL) WHERE i_board = ?";
 		
 		try {
 			con = DbCon.getCon();
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, param.getI_student());
-			ps.setNString(2, param.getTitle());
-			ps.setNString(3, param.getCtnt());
-			ps.setInt(4, param.getI_board());
+			// ps.setInt(1, param.getI_student());
+			ps.setNString(1, param.getTitle());
+			ps.setNString(2, param.getCtnt());
+			ps.setInt(3, param.getI_board());
 			result = ps.executeUpdate(); // 이외에 execute(), executeQuery()가 있음.
 		} catch (Exception e) {
 			e.printStackTrace();
